@@ -3,9 +3,7 @@
 DELIMITER //
 
 CREATE TRIGGER decrease_quant
-AFTER INSERT ON order
+AFTER INSERT ON orders
 FOR EACH ROW
-	BEGIN
-		UPDATE items
-		SET quantity = quantiy - NEW.number WHERE name=NEW.item_name;
-	END//
+	UPDATE items
+	SET quantity = quantiy - NEW.number WHERE name=NEW.item_name;
