@@ -1,6 +1,5 @@
 -- A script that creates a trigger that decreases the quantity
 -- of an item after adding a new order
-DELIMITER //
 
 CREATE TRIGGER decrease_quant
 AFTER INSERT ON orders
