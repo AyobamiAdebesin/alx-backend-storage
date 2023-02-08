@@ -5,5 +5,5 @@ CREATE TRIGGER reset_attribute
 AFTER UPDATE ON users
 FOR EACH ROW
 	IF NEW.email != OLD.email THEN
-		SET NEW.valid_email = 1
+		SET NEW.valid_email = 0
 END IF;
