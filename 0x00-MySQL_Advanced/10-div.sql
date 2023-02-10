@@ -2,13 +2,14 @@
 -- the first by the second number or returns 0 if the second number is 
 -- equal to 0
 
-CREATE FUNCTION SafeDiv(a INT, b INT) RETURN INT
+CREATE FUNCTION SafeDiv(a INT, b INT) RETURNS FLOAT
 DETERMINISTIC
 BEGIN
 	DECLARE c INT;
 	IF b = 0 THEN
-		RETURN 0
+		SET c = 0
+	ELSE
+		SET c = a/ b;
 	END IF
-	SET c = a / b;
 	RETURN c;
 END;
