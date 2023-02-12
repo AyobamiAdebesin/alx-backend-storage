@@ -18,5 +18,5 @@ class Cache:
         set the data as the value of the key and return the key
         """
         rand_key = str(uuid4())
-        self._redis.set(key, data)
+        self._redis.set(rand_key, data)
         return rand_key
