@@ -5,6 +5,18 @@ from typing import Union, Callable, Optional
 from uuid import uuid4
 
 
+def count_calls(method: Callable) -> Callable:
+    """ Count how many times methods of Cache class are called """
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """ Wrap the decorated function and return the wrapper"""
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
+    return wrapper
+
+
 class Cache:
     """ A Cache class """
     def __init__(self):
@@ -12,6 +24,7 @@ class Cache:
         self._redis = redis.Redis(host="localhost", port=6379, db=0)
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         Takes data as an argument, generate a random key,
