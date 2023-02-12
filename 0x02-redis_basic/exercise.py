@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Creating a Cache class """
 import redis
-from typing import List, Float, Union
+from typing import Union
 from uuid import uuid4
 
 
