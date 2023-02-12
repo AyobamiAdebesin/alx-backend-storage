@@ -1,4 +1,4 @@
-#!/ussr/bin/env python3
+#!/usr/bin/env python3
 """ Creating a Cache class """
 import redis
 from typing import List, Float, Union
