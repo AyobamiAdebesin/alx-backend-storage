@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Creating a Cache class """
 import redis
-from typing import Union
+from typing import Union, Callable, Optional
 from uuid import uuid4
 
 
@@ -20,3 +20,27 @@ class Cache:
         rand_key = str(uuid4())
         self._redis.set(rand_key, data)
         return rand_key
+
+    def get(self, key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+        """
+        Get the data with key and convert back to the desired format
+        """
+        value = self._redis.get(key)
+        if fn:
+            value = fn(value)
+        return value
+
+    def get_str(self, key: str) -> str:
+        """ Parametrize Cache.get to give correct value"""
+        value = self._redis.get(key)
+        return value.decode("utf-8")
+
+    def get_int(self, key: str) -> int:
+        """ Parametrize Cache.get to give correct value """
+        value = self._redis.get(key)
+        try:
+            value = int(value.deode("utf-8"))
+        except Exception:
+            value = 0
+        return value
