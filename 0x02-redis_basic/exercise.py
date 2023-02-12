@@ -2,6 +2,7 @@
 """ Creating a Cache class """
 import redis
 from typing import List, Float, Union
+from uuid import uuid4
 
 
 class Cache:
